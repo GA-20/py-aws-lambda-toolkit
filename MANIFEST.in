@@ -1,1 +1,1 @@
-include py_sls_toolkit/*.py
+include py_sls_lambda_toolkit/*.py
