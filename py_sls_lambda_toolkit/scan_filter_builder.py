@@ -1,15 +1,4 @@
-import boto3
 from boto3.dynamodb.conditions import Attr
-
-session = boto3.Session(
-    region_name='us-east-1',
-    aws_access_key_id='AKIA342VTCVHNZ52EGFG',
-    aws_secret_access_key='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'
-)
-
-dynamodb = session.resource('dynamodb')
-table = dynamodb.Table('users-prod')
-
 
 def equal(filter_expression, attribute, value):
     if bool(filter_expression):
