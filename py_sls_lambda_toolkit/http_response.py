@@ -1,5 +1,5 @@
 import json
-from .parsers import CamelToSnakeConverter
+from .parsers import SnakeToCamelConverter
 
 
 def create_response(response, status_code=200, headers=None, content_type='application/json'):
@@ -24,7 +24,7 @@ def create_response(response, status_code=200, headers=None, content_type='appli
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, X-API-AUTH, X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent',
     }
 
-    body = CamelToSnakeConverter.convert(response)
+    body = SnakeToCamelConverter.convert(response)
 
     return {
         'statusCode': status_code,
