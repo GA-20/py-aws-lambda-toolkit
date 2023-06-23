@@ -53,7 +53,7 @@ def handler(event, context):
 
 ## Contributing
 
-Contributions are welcome! For bug reports or requests please [submit an issue](mailto:contact@juliofloresdev.com). For code contributions please create a pull request.
+Contributions are welcome! For bug reports or requests please [submit an issue](https://github.com/0riion/py-sls-lambda-toolkit/issues). For code contributions please create a pull request.
 
 ## License
 
