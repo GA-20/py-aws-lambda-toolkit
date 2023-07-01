@@ -2,7 +2,7 @@ import json
 from .parsers import SnakeToCamelConverter
 
 
-def create_response(response, status_code=200, headers=None, content_type='application/json'):
+def create_response(response, status_code=200, custom_headers=None, content_type='application/json'):
     """
         Creates an HTTP response object.
 
@@ -15,7 +15,8 @@ def create_response(response, status_code=200, headers=None, content_type='appli
         Returns:
             dict: The HTTP response object with keys statusCode, headers, and body.
     """
-
+    # TODO: Add support for binary data
+    # TODO: Add to global config
     headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': True,
@@ -24,10 +25,13 @@ def create_response(response, status_code=200, headers=None, content_type='appli
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, X-API-AUTH, X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent',
     }
 
+    if custom_headers is not None:
+        headers.update(custom_headers)
+
     body = SnakeToCamelConverter.convert(response)
 
     return {
         'statusCode': status_code,
         'headers': headers,
-        'body': json.dumps(body)
+        'body': json.dumps(body) if body is not None else None
     }
