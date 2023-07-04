@@ -9,3 +9,7 @@ class TestLogger(unittest.TestCase):
         logger.debug('test logger')
         logger.warning('test logger')
         self.assertEqual(True, True)
+
+
+if __name__ == '__main__':
+    unittest.main()

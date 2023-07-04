@@ -45,3 +45,7 @@ class TestMappers(unittest.TestCase):
         fields = ['age', 'city']
         with self.assertRaises(TypeError):
             mapper(data, fields)
+
+
+if __name__ == '__main__':
+    unittest.main()

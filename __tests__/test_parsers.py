@@ -32,3 +32,7 @@ class TestParsers(unittest.TestCase):
             "testKey3": "testValue3",
         }
         self.assertEqual(convert_snake_to_camel(data), expected)
+
+
+if __name__ == '__main__':
+    unittest.main()
