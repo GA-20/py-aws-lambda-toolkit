@@ -53,19 +53,5 @@ class TestValidators(unittest.TestCase):
         path = {
             "id": "00000000-0000-0000-0000-000000000000"
         }
-        schema = {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "title": "Validate id comes in the object path",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "format": "uuid"
-                }
-            },
-            "required": [
-                "id"
-            ]
-        }
         result = validate_path(path)
         self.assertIsNone(result)

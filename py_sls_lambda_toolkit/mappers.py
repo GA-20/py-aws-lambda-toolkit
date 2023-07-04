@@ -13,6 +13,9 @@ def mapper(data, fields):
     if isinstance(data, dict):
         return {key: value for key, value in data.items() if key not in fields}
     elif isinstance(data, list):
-        return [{key: value for key, value in item.items() if key not in fields} for item in data]
+        return [{
+            key: value for key, value in item.items()
+            if key not in fields
+        } for item in data]
     else:
         raise TypeError("'data' must be a dictionary or a list")

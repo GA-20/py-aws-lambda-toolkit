@@ -1,6 +1,7 @@
-import unittest
-from py_sls_lambda_toolkit.http_response import create_response
 import json
+import unittest
+
+from py_sls_lambda_toolkit.http_response import create_response
 
 
 class TestCreateResponse(unittest.TestCase):
@@ -10,8 +11,13 @@ class TestCreateResponse(unittest.TestCase):
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Credentials': True,
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, X-API-AUTH, X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent',
+            'Access-Control-Allow-Methods': (
+                'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+            ),
+            'Access-Control-Allow-Headers': (
+                'Origin, X-Requested-With, Content-Type, Accept, X-API-AUTH, ',
+                'X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent'
+            ),
         }
         return headers
 
@@ -21,19 +27,19 @@ class TestCreateResponse(unittest.TestCase):
 
     def test_create_response(self):
         response = create_response({'foo': 'bar'})
+        headers = self._create_headers()
         self.assertEqual(response['statusCode'], 200)
-        self.assertEqual(response['headers'], self._create_headers())
+        self.assertEqual(response['headers'], headers)
         self.assertEqual(response['body'], json.dumps({'foo': 'bar'}))
-        self.assertEqual(response['headers']
-                         ['Access-Control-Allow-Origin'], '*')
-        self.assertEqual(response['headers']
-                         ['Access-Control-Allow-Credentials'], True)
-        self.assertEqual(response['headers']
-                         ['Content-Type'], 'application/json')
-        self.assertEqual(response['headers']['Access-Control-Allow-Methods'],
+        self.assertEqual(headers['Access-Control-Allow-Origin'], '*')
+        self.assertEqual(headers['Access-Control-Allow-Credentials'], True)
+        self.assertEqual(headers['Content-Type'], 'application/json')
+        self.assertEqual(headers['Access-Control-Allow-Methods'],
                          'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-        self.assertEqual(response['headers']['Access-Control-Allow-Headers'],
-                         'Origin, X-Requested-With, Content-Type, Accept, X-API-AUTH, X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent')
+        self.assertEqual(headers['Access-Control-Allow-Headers'], (
+            'Origin, X-Requested-With, Content-Type, Accept, ',
+            'X-API-AUTH, X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent'
+        ))
         self.assertEqual(response['body'], '{"foo": "bar"}')
 
     def test_create_response_with_status_code(self):
@@ -78,14 +84,25 @@ class TestCreateResponse(unittest.TestCase):
             'list': ["foo", "bar"],
             'dict': {'foo': 'bar'},
             'bigInteger': 1234567890123456789012345678901234567890,
-            'bigFloat': 1234567890123456789012345678901234567890.1234567890123456789012345678901234567890,
+            'bigFloat':
+                1234567890123456789012345678901234567890.1234567890123456789012345678901234567890,
             'base64': 'Zm9vYmFy',
             'null': None,
             'negativeInteger': -1,
             'negativeFloat': -1.1,
             'negativeBigInteger': -1234567890123456789012345678901234567890,
-            'negativeBigFloat': -1234567890123456789012345678901234567890.1234567890123456789012345678901234567890,
-            'numericList': [1, -1, 1.1, -1.1, 1234567890123456789012345678901234567890, -1234567890123456789012345678901234567890, 1234567890123456789012345678901234567890.1234567890123456789012345678901234567890, -1234567890123456789012345678901234567890.1234567890123456789012345678901234567890],
+            'negativeBigFloat':
+                -1234567890123456789012345678901234567890.1234567890123456789012345678901234567890,
+            'numericList': [
+                1,
+                -1,
+                1.1,
+                -1.1,
+                1234567890123456789012345678901234567890,
+                -1234567890123456789012345678901234567890,
+                1234567890123456789012345678901234567890.1234567890123456789012345678901234567890,
+                -1234567890123456789012345678901234567890.1234567890123456789012345678901234567890
+            ],
         }
 
         response = create_response(data)
