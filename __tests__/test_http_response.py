@@ -2,22 +2,23 @@ import json
 import unittest
 
 from py_sls_lambda_toolkit.http_response import create_response
-
+from py_sls_lambda_toolkit.settings import (
+    ACCESS_CONTROL_ALLOW_ORIGIN,
+    ACCESS_CONTROL_ALLOW_CREDENTIALS,
+    CONTENT_TYPE,
+    ACCESS_CONTROL_ALLOWED_METHODS,
+    ACCESS_CONTROL_ALLOWED_HEADERS
+)
 
 class TestCreateResponse(unittest.TestCase):
 
     def _create_headers(self):
         headers = {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': True,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Methods': (
-                'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-            ),
-            'Access-Control-Allow-Headers': (
-                'Origin, X-Requested-With, Content-Type, Accept, X-API-AUTH, ',
-                'X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent'
-            ),
+            'Access-Control-Allow-Origin': ACCESS_CONTROL_ALLOW_ORIGIN,
+            'Access-Control-Allow-Credentials': ACCESS_CONTROL_ALLOW_CREDENTIALS,
+            'Content-Type': CONTENT_TYPE,
+            'Access-Control-Allow-Methods': ACCESS_CONTROL_ALLOWED_METHODS,
+            'Access-Control-Allow-Headers': ACCESS_CONTROL_ALLOWED_HEADERS,
         }
         return headers
 
@@ -30,17 +31,7 @@ class TestCreateResponse(unittest.TestCase):
         headers = self._create_headers()
         self.assertEqual(response['statusCode'], 200)
         self.assertEqual(response['headers'], headers)
-        self.assertEqual(response['body'], json.dumps({'foo': 'bar'}))
-        self.assertEqual(headers['Access-Control-Allow-Origin'], '*')
-        self.assertEqual(headers['Access-Control-Allow-Credentials'], True)
-        self.assertEqual(headers['Content-Type'], 'application/json')
-        self.assertEqual(headers['Access-Control-Allow-Methods'],
-                         'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-        self.assertEqual(headers['Access-Control-Allow-Headers'], (
-            'Origin, X-Requested-With, Content-Type, Accept, ',
-            'X-API-AUTH, X-Amz-Date, X-Api-Key, X-Amz-Security-Token, X-Amz-User-Agent'
-        ))
-        self.assertEqual(response['body'], '{"foo": "bar"}')
+        self.assertEqual(response['body'], self._create_body({'foo': 'bar'}))
 
     def test_create_response_with_status_code(self):
         response = create_response({'foo': 'bar'}, status_code=201)

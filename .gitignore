@@ -13,6 +13,7 @@ dist/
 build/
 *.egg-info/
 *.egg
+.ruff_cache/
 
 # IDE files
 .vscode/
