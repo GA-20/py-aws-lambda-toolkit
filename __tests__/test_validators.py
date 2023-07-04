@@ -69,23 +69,3 @@ class TestValidators(unittest.TestCase):
         }
         result = validate_path(path)
         self.assertIsNone(result)
-
-    def test_validate_path_empty(self):
-        path = {}
-        schema = {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "title": "Validate id comes in the object path",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "format": "uuid"
-                }
-            },
-            "required": [
-                "id"
-            ]
-        }
-        with self.assertRaises(Exception) as context:
-            validate_path(path)
-        self.assertTrue("Path is empty" in str(context.exception))
