@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -46,9 +46,14 @@ jobs:
           pip install
           build
           --user
-      - name: Build a binary wheel
+      - name: Build a binary wheel and a source tarball
         run: >-
-          python -m build --wheel --sdist --outdir dist/
+          python3 -m
+          build
+          --sdist
+          --wheel
+          --outdir dist/
+          .
       - name: Publish distribution 📦 to PyPI
         if: startsWith(github.ref, 'refs/tags/')
         uses: pypa/gh-action-pypi-publish@release/v1
