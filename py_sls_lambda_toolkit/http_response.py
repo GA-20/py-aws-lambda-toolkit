@@ -1,5 +1,7 @@
 import json
-from .parsers import SnakeToCamelConverter
+from .parsers import (
+    convert_snake_to_camel
+)
 
 
 def create_response(response, status_code=200, custom_headers=None, content_type='application/json'):
@@ -28,7 +30,7 @@ def create_response(response, status_code=200, custom_headers=None, content_type
     if custom_headers is not None:
         headers.update(custom_headers)
 
-    body = SnakeToCamelConverter.convert(response)
+    body = convert_snake_to_camel(response)
 
     return {
         'statusCode': status_code,

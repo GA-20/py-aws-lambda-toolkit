@@ -68,7 +68,7 @@ class TestCreateResponse(unittest.TestCase):
         self.assertEqual(response['headers']['foo'], 'bar')
         self.assertEqual(response['body'], None)
 
-    def test_create_reponse_with_many_data_types(self):
+    def test_create_response_with_many_data_types(self):
 
         data = {
             'string': 'foo',

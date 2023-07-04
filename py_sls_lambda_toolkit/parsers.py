@@ -11,7 +11,7 @@ def convert_snake_to_camel(data):
             return dict_to_camel(data)
     except Exception as e:
         logging.error(e)
-    raise e
+        raise e
 
 
 def convert_camel_to_snake(data):

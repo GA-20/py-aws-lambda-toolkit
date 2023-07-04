@@ -1,6 +1,8 @@
 from .logger import logging
 from typing import Dict
-from .parsers import CamelToSnakeConverter
+from .parsers import (
+    convert_camel_to_snake,
+)
 
 
 def process_event(event: Dict) -> Dict:
@@ -24,10 +26,9 @@ def process_event(event: Dict) -> Dict:
             'headers': headers
         })
 
-        query_string_parameters = CamelToSnakeConverter.convert(
-            query_string_parameters)
-        path_parameters = CamelToSnakeConverter.convert(path_parameters)
-        body = CamelToSnakeConverter.convert(body)
+        query_string_parameters = convert_camel_to_snake(query_string_parameters)
+        path_parameters = convert_camel_to_snake(path_parameters)
+        body = convert_camel_to_snake(body)
 
         return {
             'body': body,
