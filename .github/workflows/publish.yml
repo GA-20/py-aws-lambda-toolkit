@@ -3,13 +3,22 @@ on:
   release:
     types: [published]
 jobs:
-  pypi:
+  pypi-publish:
+    name: Upload release to PyPI
     runs-on: ubuntu-latest
+    env:
+      name: pypi-publish
+      url: https://pypi.org/p/py-aws-lambda-toolkit
+    permissions:
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Update version
+        run: |
+          sed -i "s/version = .*/version = ${{ github.event.release.tag_name }}/g" setup.cfg
       - run: python3 -m pip install --upgrade build && python3 -m build
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@release/v1
@@ -17,4 +26,3 @@ jobs:
           password: ${{ secrets.PYPI_API_TOKEN }}
           skip-existing: true
           verbose: true
-          
