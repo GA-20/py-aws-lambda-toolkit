@@ -18,7 +18,7 @@ This is a lightweight Python toolkit for easily and quickly creating AWS Lambda 
 Install the package with pip:
 
 ```bash
-pip install py-sls-lambda-toolkit
+pip install py-aws-lambda-toolkit
 ```
 
 ## Usage
@@ -53,7 +53,7 @@ def handler(event, context):
 
 ## Contributing
 
-Contributions are welcome! For bug reports or requests please [submit an issue](https://github.com/0riion/py-sls-lambda-toolkit/issues). For code contributions please create a pull request.
+Contributions are welcome! For bug reports or requests please [submit an issue](https://github.com/0riion/py-aws-lambda-toolkit/issues). For code contributions please create a pull request.
 
 ## License
 
