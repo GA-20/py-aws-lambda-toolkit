@@ -16,7 +16,7 @@ path_id_schema = {
     ]
 }
 
-
+# TODO: validate custom paths
 def validate_path(path):
     try:
         if not path:
