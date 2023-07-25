@@ -1,37 +1,101 @@
 import unittest
-from py_aws_lambda_toolkit.parsers import (
-    convert_camel_to_snake,
-    convert_snake_to_camel,
-)
+from py_aws_lambda_toolkit.case_converter import CaseConverter
 
 
 class TestParsers(unittest.TestCase):
+    case_converter = CaseConverter()
 
-    def test_convert_camel_to_snake(self):
+    def test_recursive_to_camel(self):
         data = {
-            "testKey": "testValue",
-            "testKey2": "testValue2",
-            "testKey3": "testValue3",
+            'test_key': 'test_value',
+            'test_list': [
+                {
+                    'test_key': 'test_value'
+                }
+            ]
         }
         expected = {
-            "test_key": "testValue",
-            "test_key2": "testValue2",
-            "test_key3": "testValue3",
+            'testKey': 'test_value',
+            'testList': [
+                {
+                    'testKey': 'test_value'
+                }
+            ]
         }
-        self.assertEqual(convert_camel_to_snake(data), expected)
+        actual = self.case_converter._recursive_to_camel(data)
+        self.assertEqual(actual, expected)
 
-    def test_convert_snake_to_camel(self):
+    def test_recursive_to_snake(self):
         data = {
-            "test_key": "testValue",
-            "test_key2": "testValue2",
-            "test_key3": "testValue3",
+            'testKey': 'test_value',
+            'testList': [
+                {
+                    'testKey': 'test_value'
+                }
+            ]
         }
         expected = {
-            "testKey": "testValue",
-            "testKey2": "testValue2",
-            "testKey3": "testValue3",
+            'test_key': 'test_value',
+            'test_list': [
+                {
+                    'test_key': 'test_value'
+                }
+            ]
         }
-        self.assertEqual(convert_snake_to_camel(data), expected)
+        actual = self.case_converter._recursive_to_snake(data)
+        self.assertEqual(actual, expected)
+
+    def test_to_camel_str(self):
+        data = 'test_key'
+        expected = 'testKey'
+        actual = self.case_converter._to_camel_str(data)
+        self.assertEqual(actual, expected)
+
+    def test_to_snake_str(self):
+        data = 'testKey'
+        expected = 'test_key'
+        actual = self.case_converter._to_snake_str(data)
+        self.assertEqual(actual, expected)
+
+    def test_camelize(self):
+        data = {
+            'test_key': 'test_value',
+            'test_list': [
+                {
+                    'test_key': 'test_value'
+                }
+            ]
+        }
+        expected = {
+            'testKey': 'test_value',
+            'testList': [
+                {
+                    'testKey': 'test_value'
+                }
+            ]
+        }
+        actual = self.case_converter.camelize(data)
+        self.assertEqual(actual, expected)
+
+    def test_snakeify(self):
+        data = {
+            'testKey': 'test_value',
+            'testList': [
+                {
+                    'testKey': 'test_value'
+                }
+            ]
+        }
+        expected = {
+            'test_key': 'test_value',
+            'test_list': [
+                {
+                    'test_key': 'test_value'
+                }
+            ]
+        }
+        actual = self.case_converter.snakeify(data)
+        self.assertEqual(actual, expected)
 
 
 if __name__ == '__main__':

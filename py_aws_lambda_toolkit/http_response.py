@@ -1,5 +1,5 @@
 import json
-from .parsers import (
+from .case_converter import (
     convert_snake_to_camel
 )
 from .settings import (

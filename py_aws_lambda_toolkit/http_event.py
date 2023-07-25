@@ -1,6 +1,6 @@
 from .logger import logging
 from typing import Dict
-from .parsers import (
+from .case_converter import (
     convert_camel_to_snake,
 )
 
