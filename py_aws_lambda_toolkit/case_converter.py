@@ -23,50 +23,6 @@ class CaseConverter:
         snakeify: Converts a string, dictionary, or list of dictionaries to snake_case.
     """
 
-    def _recursive_to_camel(self, data):
-        """
-        Recursively converts a dictionary or list of dictionaries to CamelCase.
-
-        Args:
-            data (dict or list): The data to convert.
-
-        Returns:
-            dict or list: The converted data.
-
-        Raises:
-            TypeError: If the data is not a dictionary or list.
-        """
-
-        if isinstance(data, dict):
-            return dict_to_camel(data)
-        elif isinstance(data, list):
-            return [self._recursive_to_camel(item) for item in data]
-        else:
-            raise TypeError(
-                '_recursive_to_camel: Data must be a dict or a list of dicts.')
-
-    def _recursive_to_snake(self, data):
-        """
-        Recursively converts a dictionary or list of dictionaries to snake_case.
-
-        Args:
-            data (dict or list): The data to convert.
-
-        Returns:
-            dict or list: The converted data.
-
-        Raises:
-            TypeError: If the data is not a dictionary or list.
-        """
-
-        if isinstance(data, dict):
-            return dict_to_snake(data)
-        elif isinstance(data, list):
-            return [self._recursive_to_snake(item) for item in data]
-        else:
-            raise TypeError(
-                '_recursive_to_snake: Data must be a dict or a list of dicts.')
-
     def _to_camel_str(self, data):
         """
         Converts a string to CamelCase.
@@ -99,9 +55,61 @@ class CaseConverter:
             TypeError: If the data is not a string.
         """
 
+        # if the data is a single word like "Hello", "hello", "hellO", "HELLO"
+        # return data
+
         if not isinstance(data, str):
             raise TypeError('_to_snake_str: Data must be a string.')
+
         return to_snake(data)
+
+    def _recursive_to_camel(self, data):
+        """
+        Recursively converts a dictionary or list of dictionaries to CamelCase.
+
+        Args:
+            data (dict or list): The data to convert.
+
+        Returns:
+            dict or list: The converted data.
+
+        Raises:
+            TypeError: If the data is not a dictionary or list.
+        """
+
+        if isinstance(data, dict):
+            return dict_to_camel(data)
+        elif isinstance(data, list):
+            return [self._recursive_to_camel(item) for item in data]
+        elif isinstance(data, str) or isinstance(data, int):
+            return data
+        else:
+            raise TypeError(
+                '_recursive_to_camel: Data must be a dict or a list of dicts.')
+
+    def _recursive_to_snake(self, data):
+        """
+        Recursively converts a dictionary or list of dictionaries to snake_case.
+
+        Args:
+            data (dict or list): The data to convert.
+
+        Returns:
+            dict or list: The converted data.
+
+        Raises:
+            TypeError: If the data is not a dictionary or list.
+        """
+
+        if isinstance(data, dict):
+            return dict_to_snake(data)
+        elif isinstance(data, list):
+            return [self._recursive_to_snake(item) for item in data]
+        elif isinstance(data, str) or isinstance(data, int):
+            return data
+        else:
+            raise TypeError(
+                '_recursive_to_snake: Data must be a dict or a list of dicts.')
 
     def camelize(self, data):
         """
@@ -117,13 +125,14 @@ class CaseConverter:
             TypeError: If the data is not a string, dictionary, or list.
         """
 
-        if isinstance(data, str):
-            return self._to_camel_str(data)
-        elif isinstance(data, dict) or isinstance(data, list):
+        if isinstance(data, str) or isinstance(data, int):
+            return data
+
+        if isinstance(data, dict) or isinstance(data, list):
             return self._recursive_to_camel(data)
-        else:
-            raise TypeError(
-                'camelize: Data must be a string, a dict, or a list of dicts.')
+
+        raise TypeError(
+            'camelize: Data must be a string, a dict, or a list of dicts.')
 
     def snakeify(self, data):
         """
@@ -138,8 +147,8 @@ class CaseConverter:
         Raises:
             TypeError: If the data is not a string, dictionary, or list.
         """
-        if isinstance(data, str):
-            return self._to_snake_str(data)
+        if isinstance(data, str) or isinstance(data, int):
+            return data
 
         if isinstance(data, dict) or isinstance(data, list):
             return self._recursive_to_snake(data)

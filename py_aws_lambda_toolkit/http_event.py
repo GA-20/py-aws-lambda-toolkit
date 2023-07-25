@@ -1,8 +1,8 @@
 from .logger import logging
 from typing import Dict
-from .case_converter import (
-    convert_camel_to_snake,
-)
+from .case_converter import CaseConverter
+
+case_converter = CaseConverter()
 
 
 def process_event(event: Dict) -> Dict:
@@ -26,9 +26,10 @@ def process_event(event: Dict) -> Dict:
             'headers': headers
         })
 
-        query_string_parameters = convert_camel_to_snake(query_string_parameters)
-        path_parameters = convert_camel_to_snake(path_parameters)
-        body = convert_camel_to_snake(body)
+        query_string_parameters = case_converter.snakeify(
+            query_string_parameters)
+        path_parameters = case_converter.snakeify(path_parameters)
+        body = case_converter.snakeify(body)
 
         return {
             'body': body,

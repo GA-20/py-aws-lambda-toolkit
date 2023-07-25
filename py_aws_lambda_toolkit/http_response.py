@@ -1,7 +1,5 @@
 import json
-from .case_converter import (
-    convert_snake_to_camel
-)
+from .case_converter import CaseConverter
 from .settings import (
     ACCESS_CONTROL_ALLOW_ORIGIN,
     ACCESS_CONTROL_ALLOW_CREDENTIALS,
@@ -9,6 +7,8 @@ from .settings import (
     ACCESS_CONTROL_ALLOWED_METHODS,
     ACCESS_CONTROL_ALLOWED_HEADERS
 )
+
+case_converter = CaseConverter()
 
 
 def create_response(
@@ -42,7 +42,7 @@ def create_response(
     if custom_headers is not None:
         headers.update(custom_headers)
 
-    body = convert_snake_to_camel(response)
+    body = case_converter.camelize(response)
 
     return {
         'statusCode': status_code,
