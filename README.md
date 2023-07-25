@@ -29,10 +29,10 @@ Use the package in your code:
 import logging
 from py_aws_lambda_toolkit.http_event import process_event
 from py_aws_lambda_toolkit.http_response import create_response
-from py_aws_lambda_toolkit.status_code import StatusCode
+from py_aws_lambda_toolkit.status import StatusCode
 from py_aws_lambda_toolkit.logger import logging
 
-status_code = StatusCode()
+status = StatusCode()
 
 def handler(event, context):
     # Process the event
@@ -44,7 +44,7 @@ def handler(event, context):
     # Create a response
     response = create_response(
         { "ok": True, "message": "Processed event successfully" },
-        status_code=status_code.code_200_success,
+        status=status.code_200_success,
     )
 
     return response

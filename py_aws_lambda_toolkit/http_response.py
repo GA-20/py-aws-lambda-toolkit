@@ -13,7 +13,7 @@ case_converter = CaseConverter()
 
 def create_response(
     response,
-    status_code=200,
+    status=200,
     custom_headers=None,
     content_type=CONTENT_TYPE
 ):
@@ -22,7 +22,7 @@ def create_response(
 
         Parameters:
             response (dict): The response body.
-            status_code (int): The HTTP status code to be returned.
+            status (int): The HTTP status code to be returned.
             headers (dict): The headers to be returned with the response.
             content_type (str): The content type of the response.
 
@@ -45,7 +45,7 @@ def create_response(
     body = case_converter.camelize(response)
 
     return {
-        'statusCode': status_code,
+        'statusCode': status,
         'headers': headers,
         'body': json.dumps(body) if body is not None else None
     }
