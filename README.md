@@ -1,4 +1,4 @@
-# Py SLS Lambda Toolkit
+# Py aws Lambda Toolkit
 
 This is a lightweight Python toolkit for easily and quickly creating AWS Lambda functions with the Serverless Framework. It includes the following features:
 
