@@ -1,5 +1,5 @@
 import unittest
-from py_sls_lambda_toolkit.logger import logger
+from py_aws_lambda_toolkit.logger import logger
 
 class TestLogger(unittest.TestCase):
 

@@ -1,5 +1,5 @@
 import unittest
-from py_sls_lambda_toolkit.mappers import mapper
+from py_aws_lambda_toolkit.mappers import mapper
 
 
 class TestMappers(unittest.TestCase):

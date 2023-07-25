@@ -1,5 +1,5 @@
 import unittest
-from py_sls_lambda_toolkit.validators import (
+from py_aws_lambda_toolkit.validators import (
     validate_path,
     validate_data,
 )

@@ -1,5 +1,5 @@
 import unittest
-from py_sls_lambda_toolkit.http_event import process_event
+from py_aws_lambda_toolkit.http_event import process_event
 
 
 class TestProcessEvent(unittest.TestCase):

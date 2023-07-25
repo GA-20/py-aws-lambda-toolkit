@@ -1,5 +1,5 @@
 import unittest
-from py_sls_lambda_toolkit.parsers import (
+from py_aws_lambda_toolkit.parsers import (
     convert_camel_to_snake,
     convert_snake_to_camel,
 )

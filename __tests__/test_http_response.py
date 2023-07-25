@@ -1,8 +1,8 @@
 import json
 import unittest
 
-from py_sls_lambda_toolkit.http_response import create_response
-from py_sls_lambda_toolkit.settings import (
+from py_aws_lambda_toolkit.http_response import create_response
+from py_aws_lambda_toolkit.settings import (
     ACCESS_CONTROL_ALLOW_ORIGIN,
     ACCESS_CONTROL_ALLOW_CREDENTIALS,
     CONTENT_TYPE,

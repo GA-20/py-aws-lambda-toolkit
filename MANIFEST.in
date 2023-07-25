@@ -1,1 +1,1 @@
-include py_sls_lambda_toolkit/*.py
+include py_aws_lambda_toolkit/*.py

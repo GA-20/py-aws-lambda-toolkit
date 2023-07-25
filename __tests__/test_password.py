@@ -1,5 +1,5 @@
 import unittest
-from py_sls_lambda_toolkit.password import (
+from py_aws_lambda_toolkit.password import (
     hash_password,
     verify_password,
 )

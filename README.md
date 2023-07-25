@@ -27,10 +27,10 @@ Use the package in your code:
 
 ```python
 import logging
-from py_sls_lambda_toolkit.http_event import process_event
-from py_sls_lambda_toolkit.http_response import create_response
-from py_sls_lambda_toolkit.status_code import StatusCode
-from py_sls_lambda_toolkit.logger import logging
+from py_aws_lambda_toolkit.http_event import process_event
+from py_aws_lambda_toolkit.http_response import create_response
+from py_aws_lambda_toolkit.status_code import StatusCode
+from py_aws_lambda_toolkit.logger import logging
 
 status_code = StatusCode()
 
