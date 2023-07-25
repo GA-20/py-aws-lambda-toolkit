@@ -1,5 +1,6 @@
 from boto3.dynamodb.conditions import Attr
 
+
 def equal(filter_expression, attribute, value):
     if bool(filter_expression):
         filter_expression &= Attr(attribute).eq(value)

@@ -1,5 +1,8 @@
 import unittest
-from py_aws_lambda_toolkit.jwt import create_token, verify_token
+from py_aws_lambda_toolkit.jwt import (
+    create_token,
+    verify_token
+)
 import jwt
 
 class TestJWT(unittest.TestCase):
